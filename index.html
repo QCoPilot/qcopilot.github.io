@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OMNI-RIDE | Coming Soon</title>
+  <meta name="description" content="OMNI-RIDE — Competing with the Snowboarding off-season." />
+  <meta name="theme-color" content="#0b0b12" />
+
+  <!-- Optional social preview tags -->
+  <meta property="og:title" content="OMNI-RIDE" />
+  <meta property="og:description" content="Competing with the Snowboarding off-season" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root {
+      --bg: #07070b;
+      --panel: rgba(13, 13, 20, 0.62);
+      --panel-border: rgba(255, 255, 255, 0.11);
+      --text: #f5f7ff;
+      --muted: rgba(245, 247, 255, 0.78);
+      --accent: #8b5cf6;         /* purple */
+      --accent-2: #c084fc;       /* lighter purple */
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      position: relative;
+      overflow-x: hidden;
+
+      /* Layer 1 = dark overlay + color glow
+         Layer 2 = your optional background image (upload as bg.jpg in same repo folder)
+         If bg.jpg is missing, the page still works and looks good. */
+      background-image:
+        radial-gradient(1200px 600px at 10% 10%, rgba(139, 92, 246, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 90% 85%, rgba(192, 132, 252, 0.10), transparent 65%),
+        linear-gradient(rgba(5, 5, 9, 0.72), rgba(5, 5, 9, 0.80)),
+        url("bg.jpg");
+      background-size: cover, cover, cover, cover;
+      background-position: center center, center center, center center, center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    /* Soft vignette */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.32) 100%);
+      z-index: 0;
+    }
+
+    .page {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      width: min(820px, 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.05),
+        rgba(255,255,255,0.02)
+      );
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: clamp(22px, 4vw, 42px);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -45% auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(139, 92, 246, 0.25), rgba(139, 92, 246, 0) 70%);
+      z-index: -1;
+      filter: blur(10px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      margin-bottom: 18px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, var(--accent-2), var(--accent));
+      box-shadow: 0 0 18px rgba(139, 92, 246, 0.65);
+      flex: 0 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      line-height: 0.95;
+      font-weight: 900;
+      font-size: clamp(2.1rem, 8vw, 5.2rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .gradient-text {
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.98) 5%,
+        rgba(214, 201, 255, 0.96) 45%,
+        rgba(192, 132, 252, 0.95) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+    }
+
+    .sub {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      line-height: 1.4;
+      max-width: 38ch;
+      text-wrap: pretty;
+    }
+
+    .actions {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      min-height: 50px;
+      border-radius: 14px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease, border-color 140ms ease;
+    }
+
+    .btn-primary {
+      color: #ffffff;
+      background: linear-gradient(180deg, #9b6bff 0%, #7c3aed 100%);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow:
+        0 10px 26px rgba(124, 58, 237, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 14px 30px rgba(124, 58, 237, 0.42),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      opacity: 0.96;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid rgba(192, 132, 252, 0.85);
+      outline-offset: 3px;
+    }
+
+    .note {
+      margin-top: 14px;
+      color: rgba(245,247,255,0.64);
+      font-size: 0.92rem;
+    }
+
+    .footer {
+      margin-top: 26px;
+      color: rgba(245,247,255,0.52);
+      font-size: 0.84rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* Small screen polish */
+    @media (max-width: 520px) {
+      .card { padding: 20px; border-radius: 18px; }
+      .actions { margin-top: 22px; }
+      .btn { width: 100%; }
+      .sub { max-width: 100%; }
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition: none; }
+      body { background-attachment: scroll; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card" aria-labelledby="headline">
+      <div class="badge" aria-label="Project status">
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span>Coming Soon</span>
+      </div>
+
+      <h1 id="headline" class="gradient-text">OMNI-RIDE</h1>
+
+      <p class="sub">Competing with the Snowboarding off-season</p>
+
+      <div class="actions">
+        <a
+          class="btn btn-primary"
+          href="https://www.linkedin.com/in/benjamin-smith-93a07a106/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact Ben Smith on LinkedIn"
+        >
+          Contact Me
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <p class="note">A new way to ride is in development.</p>
+
+      <div class="footer">© <span id="year">2026</span> OMNI-RIDE</div>
+    </section>
+  </main>
+
+  <!-- Optional: free Google Analytics (GA4) later
+       If you ever want it, create a free GA4 property and I can give you a copy-paste snippet.
+       Since you asked to keep setup easy, it's not included by default. -->
+</body>
+</html>
