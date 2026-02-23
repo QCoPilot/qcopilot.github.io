@@ -7,7 +7,6 @@
   <meta name="description" content="OMNI-RIDE — Competing with the Snowboarding off-season." />
   <meta name="theme-color" content="#0b0b12" />
 
-  <!-- Optional social preview tags -->
   <meta property="og:title" content="OMNI-RIDE" />
   <meta property="og:description" content="Competing with the Snowboarding off-season" />
   <meta property="og:type" content="website" />
@@ -15,12 +14,11 @@
   <style>
     :root {
       --bg: #07070b;
-      --panel: rgba(13, 13, 20, 0.62);
       --panel-border: rgba(255, 255, 255, 0.11);
       --text: #f5f7ff;
       --muted: rgba(245, 247, 255, 0.78);
-      --accent: #8b5cf6;         /* purple */
-      --accent-2: #c084fc;       /* lighter purple */
+      --accent: #8b5cf6;
+      --accent-2: #c084fc;
       --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
       --radius: 22px;
     }
@@ -39,9 +37,9 @@
       position: relative;
       overflow-x: hidden;
 
-      /* Layer 1 = dark overlay + color glow
-         Layer 2 = your optional background image (upload as bg.jpg in same repo folder)
-         If bg.jpg is missing, the page still works and looks good. */
+      /* Optional background image:
+         Upload a file named "bg.jpg" in the same repo folder as index.html.
+         If no bg.jpg exists, the page still looks clean because the gradients render anyway. */
       background-image:
         radial-gradient(1200px 600px at 10% 10%, rgba(139, 92, 246, 0.18), transparent 60%),
         radial-gradient(900px 500px at 90% 85%, rgba(192, 132, 252, 0.10), transparent 65%),
@@ -53,14 +51,12 @@
       background-attachment: fixed;
     }
 
-    /* Soft vignette */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background:
-        radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.32) 100%);
+      background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.32) 100%);
       z-index: 0;
     }
 
@@ -68,7 +64,7 @@
       min-height: 100svh;
       display: grid;
       place-items: center;
-      padding: 28px;
+      padding: 28px 28px 72px; /* extra bottom space so fixed footer never overlaps content */
       position: relative;
       z-index: 1;
     }
@@ -89,6 +85,7 @@
       position: relative;
       overflow: hidden;
       isolation: isolate;
+      text-align: center; /* centered everything */
     }
 
     .card::before {
@@ -129,9 +126,9 @@
 
     h1 {
       margin: 0;
-      line-height: 0.95;
+      line-height: 0.98;
       font-weight: 900;
-      font-size: clamp(2.1rem, 8vw, 5.2rem);
+      font-size: clamp(1.8rem, 6vw, 4.2rem); /* slightly smaller title */
       letter-spacing: 0.04em;
       text-transform: uppercase;
       text-wrap: balance;
@@ -151,20 +148,22 @@
     }
 
     .sub {
-      margin: 16px 0 0;
+      margin: 14px auto 0;
       color: var(--muted);
-      font-size: clamp(1rem, 2.2vw, 1.3rem);
-      line-height: 1.4;
-      max-width: 38ch;
+      font-size: clamp(0.98rem, 2.3vw, 1.38rem); /* slightly smaller than title */
+      font-weight: 600;
+      line-height: 1.22;
+      max-width: 24ch;
       text-wrap: pretty;
     }
 
     .actions {
-      margin-top: 26px;
+      margin-top: 28px;
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       align-items: center;
+      justify-content: center; /* center button row */
     }
 
     .btn {
@@ -175,10 +174,11 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 14px 20px;
-      min-height: 50px;
-      border-radius: 14px;
+      padding: 17px 30px; /* bigger button */
+      min-height: 60px;   /* bigger button */
+      border-radius: 16px;
       font-weight: 800;
+      font-size: 1.12rem; /* bigger text inside button */
       letter-spacing: 0.01em;
       cursor: pointer;
       transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease, border-color 140ms ease;
@@ -211,27 +211,52 @@
     }
 
     .note {
-      margin-top: 14px;
-      color: rgba(245,247,255,0.64);
-      font-size: 0.92rem;
+      margin-top: 16px;
+      color: rgba(245,247,255,0.88);
+      font-size: clamp(1rem, 1.8vw, 1.12rem); /* slightly larger */
+      font-weight: 700; /* bold */
+      letter-spacing: 0.01em;
     }
 
+    /* Footer pinned to very bottom of page */
     .footer {
-      margin-top: 26px;
-      color: rgba(245,247,255,0.52);
+      position: fixed;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      color: rgba(245,247,255,0.62);
       font-size: 0.84rem;
       letter-spacing: 0.02em;
+      z-index: 3;
+      text-align: center;
+      width: max-content;
+      pointer-events: none;
     }
 
-    /* Small screen polish */
     @media (max-width: 520px) {
-      .card { padding: 20px; border-radius: 18px; }
-      .actions { margin-top: 22px; }
-      .btn { width: 100%; }
-      .sub { max-width: 100%; }
+      .card {
+        padding: 20px;
+        border-radius: 18px;
+      }
+
+      .actions {
+        margin-top: 24px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .sub {
+        max-width: 100%;
+      }
+
+      .footer {
+        bottom: 10px;
+        font-size: 0.8rem;
+      }
     }
 
-    /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
       .btn { transition: none; }
       body { background-attachment: scroll; }
@@ -248,7 +273,8 @@
 
       <h1 id="headline" class="gradient-text">OMNI-RIDE</h1>
 
-      <p class="sub">Competing with the Snowboarding off-season</p>
+      <!-- line break after "the" -->
+      <p class="sub">Competing with the<br>Snowboarding off-season</p>
 
       <div class="actions">
         <a
@@ -263,14 +289,12 @@
         </a>
       </div>
 
-      <p class="note">A new way to ride is in development.</p>
-
-      <div class="footer">© <span id="year">2026</span> OMNI-RIDE</div>
+      <!-- edited + larger + bold -->
+      <p class="note">A new way to ride is coming soon.</p>
     </section>
   </main>
 
-  <!-- Optional: free Google Analytics (GA4) later
-       If you ever want it, create a free GA4 property and I can give you a copy-paste snippet.
-       Since you asked to keep setup easy, it's not included by default. -->
+  <!-- moved to very bottom of page -->
+  <div class="footer">© 2026 OMNI-RIDE</div>
 </body>
 </html>
